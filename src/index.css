@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sl-select {
+    @apply rounded border-2;
+    min-height: 2rem;
+}
