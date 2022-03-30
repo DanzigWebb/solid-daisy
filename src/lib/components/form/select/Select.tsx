@@ -2,6 +2,7 @@ import { Accessor, Component, createContext, createSignal, onCleanup, Show, useC
 import { Portal } from 'solid-js/web';
 import usePopper from '@root/src/lib/popper/usePopper';
 import { SelectDropdown } from '@components/form/select/SelectDropdown';
+import { ScaleTransition } from '@components/utils/transitions';
 
 type ContextType = {
     value: Accessor<string>
@@ -18,6 +19,7 @@ export const Select: Component<Props> = (props) => {
 
     const [value, setValue] = createSignal('');
     const [show, setShow] = createSignal(false);
+    const [showPortal, setShowPortal] = createSignal(false);
 
     const [reference, setReference] = createSignal<HTMLElement>();
     const [popper, setPopper] = createSignal<HTMLElement>();
@@ -36,17 +38,56 @@ export const Select: Component<Props> = (props) => {
     });
 
     function showDropdown() {
+        if (show()) {
+            return;
+        }
         setShow(true);
+        setShowPortal(true);
+        setListener();
     }
 
-    function destroyDropdown() {
+    function hideDropdown() {
         setShow(false);
+        removeListener();
+    }
+
+    const listener = (e: Event) => {
+        if (!show()) {
+            return;
+        }
+
+        const target = e.target as HTMLElement;
+        const select = reference();
+        const dropdown = popper();
+
+        if (select?.contains(target)) {
+            return;
+        }
+
+        const isBackdropClicked = !dropdown?.contains(target);
+
+        if (isBackdropClicked) {
+            hideDropdown();
+        }
+    };
+
+    function setListener() {
+        document.addEventListener('click', listener);
+    }
+
+    function removeListener() {
+        document.removeEventListener('click', listener);
     }
 
     const store: ContextType = {
         value,
-        setValue
+        setValue: optionChecked
     };
+
+    function optionChecked(value: any) {
+        setValue(value);
+        hideDropdown();
+    }
 
     return (
         <SelectContext.Provider value={store}>
@@ -59,14 +100,16 @@ export const Select: Component<Props> = (props) => {
                 onFocus={showDropdown}
             />
 
-            <Show when={show()}>
+            <Show when={showPortal()}>
                 <Portal>
-                    <div class="overlay" onClick={() => destroyDropdown()}>
-                        <div ref={setPopper} style={{'min-width': reference()?.scrollWidth + 'px'}}>
-                            <SelectDropdown>
-                                {props.children}
-                            </SelectDropdown>
-                        </div>
+                    <div ref={setPopper} style={{'min-width': reference()?.scrollWidth + 'px'}}>
+                        <ScaleTransition appear={true} onExit={() => setShowPortal(false)}>
+                            <Show when={show()}>
+                                <SelectDropdown>
+                                    {props.children}
+                                </SelectDropdown>
+                            </Show>
+                        </ScaleTransition>
                     </div>
                 </Portal>
             </Show>

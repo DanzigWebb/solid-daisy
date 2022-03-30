@@ -19,7 +19,7 @@ export const SelectDropdown: Component = (props) => {
     return (
         <div
             ref={setDropdown}
-            class="p-2 shadow menu dropdown-content bg-base-200 max-h-60 overflow-y-scroll"
+            class="shadow-lg menu dropdown-content bg-base-200 max-h-60 overflow-y-scroll"
             tabIndex={0}
         >
             {props.children}
