@@ -1,17 +1,14 @@
 import type { Component } from 'solid-js';
+import { Drawer, Header } from '@views/template';
+import { Routers } from '@shared/router/Routers';
 
 const App: Component = () => {
 
-    function onSelectChange(v: string) {
-        console.log('onSelectChange', v);
-    }
-
     return (
-        <div class="p-4">
-            <div class="max-w-xs">
-
-            </div>
-        </div>
+        <Drawer>
+            <Header/>
+            <Routers/>
+        </Drawer>
     );
 };
 
