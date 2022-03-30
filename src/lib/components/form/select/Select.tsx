@@ -1,8 +1,5 @@
-import { Accessor, Component, createContext, createSignal, onCleanup, Show, useContext } from 'solid-js';
-import { Portal } from 'solid-js/web';
-import usePopper from '@root/src/lib/popper/usePopper';
+import { Accessor, Component, createContext, createMemo, createSignal, Show, useContext } from 'solid-js';
 import { SelectDropdown } from '@components/form/select/SelectDropdown';
-import { ScaleTransition } from '@components/utils/transitions';
 
 type ContextType = {
     value: Accessor<string>
@@ -17,66 +14,35 @@ type Props = {
 
 export const Select: Component<Props> = (props) => {
 
-    const [value, setValue] = createSignal('');
-    const [show, setShow] = createSignal(false);
-    const [showPortal, setShowPortal] = createSignal(false);
-
     const [reference, setReference] = createSignal<HTMLElement>();
-    const [popper, setPopper] = createSignal<HTMLElement>();
-
-    const instance = usePopper(reference, popper, {
-        modifiers: [{
-            name: 'offset',
-            options: {
-                offset: [0, 8],
-            },
-        }]
+    const [state, setState] = createSignal({
+        value: '',
+        isHasDropdown: false,
+        isShowDropdown: false,
     });
 
-    onCleanup(() => {
-        instance()?.destroy();
-    });
+    const value = createMemo(() => state().value);
+
+    function setValue(value: string) {
+        setState(state => ({...state, value}));
+    }
 
     function showDropdown() {
-        if (show()) {
-            return;
-        }
-        setShow(true);
-        setShowPortal(true);
-        setListener();
+        setState(state => ({
+            ...state,
+            isHasDropdown: true,
+            isShowDropdown: true,
+        }));
+    }
+
+    function destroyDropdown() {
+        const isHasDropdown = false;
+        setState(state => ({...state, isHasDropdown}));
     }
 
     function hideDropdown() {
-        setShow(false);
-        removeListener();
-    }
-
-    const listener = (e: Event) => {
-        if (!show()) {
-            return;
-        }
-
-        const target = e.target as HTMLElement;
-        const select = reference();
-        const dropdown = popper();
-
-        if (select?.contains(target)) {
-            return;
-        }
-
-        const isBackdropClicked = !dropdown?.contains(target);
-
-        if (isBackdropClicked) {
-            hideDropdown();
-        }
-    };
-
-    function setListener() {
-        document.addEventListener('click', listener);
-    }
-
-    function removeListener() {
-        document.removeEventListener('click', listener);
+        const isShowDropdown = false;
+        setState(state => ({...state, isShowDropdown}));
     }
 
     const store: ContextType = {
@@ -100,18 +66,14 @@ export const Select: Component<Props> = (props) => {
                 onFocus={showDropdown}
             />
 
-            <Show when={showPortal()}>
-                <Portal>
-                    <div ref={setPopper} style={{'min-width': reference()?.scrollWidth + 'px'}}>
-                        <ScaleTransition appear={true} onExit={() => setShowPortal(false)}>
-                            <Show when={show()}>
-                                <SelectDropdown>
-                                    {props.children}
-                                </SelectDropdown>
-                            </Show>
-                        </ScaleTransition>
-                    </div>
-                </Portal>
+            <Show when={state().isHasDropdown}>
+                <SelectDropdown
+                    isShow={state().isShowDropdown}
+                    reference={reference}
+                    onClose={destroyDropdown}
+                >
+                    {props.children}
+                </SelectDropdown>
             </Show>
         </SelectContext.Provider>
     );
