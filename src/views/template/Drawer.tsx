@@ -9,7 +9,7 @@ export const Drawer: Component = (props) => {
             <div class="drawer-content flex flex-col">
                 {props.children}
             </div>
-            <div class="drawer-side bg-base-200">
+            <div class="drawer-side bg-base-200 shadow">
                 <label for="my-drawer-2" class="drawer-overlay"/>
                 <div className="w-60">
                     <div
