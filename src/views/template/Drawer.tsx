@@ -37,6 +37,7 @@ export const Drawer: Component = (props) => {
                             <span>Navigation</span>
                         </li>
                         <li><Link href={`/${RoutersEnum.MENU}`}>Menu</Link></li>
+                        <li><Link href={`/${RoutersEnum.TABS}`}>Tabs</Link></li>
                         <li/>
                     </ul>
                 </div>
