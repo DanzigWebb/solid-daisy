@@ -7,7 +7,7 @@ export const NotFound: Component = () => {
 
     return (
         <Page full>
-            <div class="hero h-full bg-base-200">
+            <div class="hero h-full bg-base-100">
                 <div class="text-center hero-content">
                     <div class="max-w-md">
                         <h1 class="text-9xl font-bold">404</h1>
