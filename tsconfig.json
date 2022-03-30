@@ -13,7 +13,9 @@
     "isolatedModules": true,
     "paths": {
       "@root/*": ["./*"],
-      "@components/*": ["./src/lib/components/*"]
+      "@components/*": ["./src/lib/components/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@views/*": ["./src/views/*"],
     }
   }
 }
