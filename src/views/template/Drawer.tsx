@@ -32,6 +32,13 @@ export const Drawer: Component = (props) => {
                         </li>
                         <li/>
                     </ul>
+                    <ul class="menu menu-compact flex flex-col p-0 px-2">
+                        <li class="menu-title">
+                            <span>Navigation</span>
+                        </li>
+                        <li><Link href={`/${RoutersEnum.MENU}`}>Menu</Link></li>
+                        <li/>
+                    </ul>
                 </div>
             </div>
         </div>

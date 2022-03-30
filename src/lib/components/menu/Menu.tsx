@@ -8,6 +8,7 @@ type Props = {
     isShow: boolean;
     reference?: HTMLElement;
     onBackdropClick?: () => void;
+    minWidth?: number;
 }
 
 /**
@@ -70,7 +71,7 @@ export const Menu: Component<Props> = (props) => {
         <Show when={show()}>
             <Portal>
                 <Overlay onClick={() => onBackdropClick()}>
-                    <div ref={setPopper} onClick={e => e.stopPropagation()}>
+                    <div ref={setPopper} style={{'min-width': props.minWidth + 'px'}} onClick={e => e.stopPropagation()}>
                         <ScaleTransition appear={true} onExit={destroy}>
                             {props.isShow && (
                                 <ul class="menu bg-base-200 z-10 shadow-xl">
