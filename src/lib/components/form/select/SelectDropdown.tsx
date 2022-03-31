@@ -77,10 +77,7 @@ export const SelectDropdown: Component<Props> = (props) => {
             <div ref={setDropdown} style={{'min-width': props.reference()?.offsetWidth + 'px'}}>
                 <ScaleTransition appear={true} onExit={() => props.onClose?.()}>
                     <Show when={show()}>
-                        <div
-                            class="shadow-lg menu dropdown-content bg-base-200 max-h-60 overflow-y-scroll"
-                            tabIndex={0}
-                        >
+                        <div class="shadow-lg menu dropdown-content bg-base-200 max-h-60 overflow-y-scroll">
                             {props.children}
                         </div>
                     </Show>
