@@ -19,29 +19,42 @@ export const Drawer: Component = (props) => {
                         <span class="text-base-content uppercase">UI</span>
                     </div>
 
-                    <ul class="menu menu-compact flex flex-col p-0 px-2">
-                        <li/>
-                        <li class="menu-title">
-                            <span>Form</span>
-                        </li>
-                        <li>
-                            <Link href={`/${RoutersEnum.FORM_SELECT}`}>Select</Link>
-                        </li>
-                        <li>
-                            <Link href={`/${RoutersEnum.FORM_INPUT}`}>Input</Link>
-                        </li>
-                        <li/>
-                    </ul>
-                    <ul class="menu menu-compact flex flex-col p-0 px-2">
-                        <li class="menu-title">
-                            <span>Navigation</span>
-                        </li>
-                        <li><Link href={`/${RoutersEnum.MENU}`}>Menu</Link></li>
-                        <li><Link href={`/${RoutersEnum.TABS}`}>Tabs</Link></li>
-                        <li/>
-                    </ul>
+                    <Menu>
+                        <MenuDivider/>
+                        <MenuTitle>Form</MenuTitle>
+                        <MenuLink href={`/${RoutersEnum.FORM_SELECT}`}>Select</MenuLink>
+                        <MenuLink href={`/${RoutersEnum.FORM_INPUT}`}>Input</MenuLink>
+                        <MenuDivider/>
+                    </Menu>
+
+                    <Menu>
+                        <MenuTitle>Navigation</MenuTitle>
+                        <MenuLink href={`/${RoutersEnum.MENU}`}>Menu</MenuLink>
+                        <MenuLink href={`/${RoutersEnum.TABS}`}>Tabs</MenuLink>
+                        <MenuDivider/>
+                    </Menu>
                 </div>
             </div>
         </div>
     );
 };
+
+const Menu: Component = (props) => (
+    <ul class="menu menu-compact gap-1 flex flex-col p-0 px-2">
+        {props.children}
+    </ul>
+);
+
+const MenuTitle: Component = (props) => (
+    <li class="menu-title">
+        <span>{props.children}</span>
+    </li>
+);
+
+const MenuLink: Component<{ href: string }> = (props) => (
+    <li>
+        <Link href={props.href}>{props.children}</Link>
+    </li>
+);
+
+const MenuDivider = () => <li/>;
