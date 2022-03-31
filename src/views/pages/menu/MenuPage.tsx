@@ -34,7 +34,7 @@ export const MenuPage: Component = () => {
                 ref={setReference}
                 onClick={toggle}
             >
-                Cars menu
+                Menu
             </button>
             <Menu
                 isShow={state().show}
@@ -42,9 +42,9 @@ export const MenuPage: Component = () => {
                 onBackdropClick={toggle}
                 minWidth={state().reference?.scrollWidth}
             >
-                <MenuOption>Opel</MenuOption>
-                <MenuOption>Audi</MenuOption>
-                <MenuOption>Ford</MenuOption>
+                <MenuOption><i class="fa-solid fa-car pr-2"/>Cars</MenuOption>
+                <MenuOption><i class="fa-solid fa-plane-departure pr-2"/>Plane</MenuOption>
+                <MenuOption><i class="fa-solid fa-building pr-2"/>Buildings</MenuOption>
             </Menu>
         </Page>
     );
