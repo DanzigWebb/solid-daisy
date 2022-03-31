@@ -3,5 +3,6 @@ export enum RoutersEnum {
     FORM_SELECT = 'select',
     FORM_INPUT = 'input',
     MENU = 'menu',
-    TABS = 'tabs'
+    TABS = 'tabs',
+    BTN_GROUPS = 'btn-groups',
 }

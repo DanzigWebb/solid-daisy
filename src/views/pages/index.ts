@@ -3,3 +3,4 @@ export * from './not-found/NotFound';
 export * from './select/SelectPage';
 export * from './menu/MenuPage';
 export * from './tabs/TabsPage';
+export * from './btn-group/BtnGroupPage';
