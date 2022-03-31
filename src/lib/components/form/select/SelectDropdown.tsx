@@ -74,7 +74,7 @@ export const SelectDropdown: Component<Props> = (props) => {
 
     return (
         <Portal>
-            <div ref={setDropdown} style={{'min-width': props.reference()?.scrollWidth + 'px'}}>
+            <div ref={setDropdown} style={{'min-width': props.reference()?.offsetWidth + 'px'}}>
                 <ScaleTransition appear={true} onExit={() => props.onClose?.()}>
                     <Show when={show()}>
                         <div
