@@ -24,6 +24,7 @@ export const Drawer: Component = (props) => {
                         <MenuTitle>Form</MenuTitle>
                         <MenuLink href={`/${RoutersEnum.FORM_SELECT}`}>Select</MenuLink>
                         <MenuLink href={`/${RoutersEnum.FORM_INPUT}`}>Input</MenuLink>
+                        <MenuLink href={`/${RoutersEnum.RANGE}`}>Range</MenuLink>
                         <MenuDivider/>
                     </Menu>
 
