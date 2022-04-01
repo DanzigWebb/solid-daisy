@@ -1,4 +1,4 @@
-import { Component, createSignal, onCleanup, Show } from 'solid-js';
+import { Component, createEffect, createSignal, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import usePopper from '@root/src/lib/popper/usePopper';
 import { Placement } from '@popperjs/core';
@@ -7,6 +7,7 @@ import { ScaleTransition } from '@components/utils/transitions/ScaleTransition';
 type Props = {
     message: string;
     placement?: Placement;
+    class?: string;
 }
 
 /**
@@ -29,29 +30,27 @@ export const Tooltip: Component<Props> = (props) => {
     const [triggerRef, setTriggerRef] = createSignal<HTMLElement>();
     const [popperRef, setPopperRef] = createSignal<HTMLElement>();
 
-    const instance = usePopper(triggerRef, popperRef, {
-        placement: props.placement || 'top',
-        modifiers: [{
-            name: 'offset',
-            options: {
-                offset: [0, 10],
-            },
-        }]
-    });
+    createEffect(() => {
+        usePopper(triggerRef, popperRef, {
+            placement: props.placement || 'top',
+            modifiers: [{
+                name: 'offset',
+                options: {
+                    offset: [0, 10],
+                },
+            }]
+        });
+    })
 
     const showTooltip = () => {
         setShow(true);
         setTooltip(true);
     };
 
-    onCleanup(() => {
-        instance()?.destroy();
-    });
-
     return (
         <>
             <span
-                class="inline-block"
+                class={`inline-block ${props.class || ''}`}
                 ref={setTriggerRef}
                 onMouseEnter={showTooltip}
                 onMouseLeave={() => setShow(false)}
