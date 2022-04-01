@@ -41,6 +41,12 @@ export const Drawer: Component = (props) => {
                         <MenuLink href={`/${RoutersEnum.BTN_GROUPS}`}>Buttons group</MenuLink>
                         <MenuDivider/>
                     </Menu>
+
+                    <Menu>
+                        <MenuTitle>Data view</MenuTitle>
+                        <MenuLink href={`/${RoutersEnum.TOOLTIP}`}>Tooltip</MenuLink>
+                        <MenuDivider/>
+                    </Menu>
                 </div>
             </div>
         </div>
