@@ -5,5 +5,6 @@ export enum RoutersEnum {
     MENU = 'menu',
     TABS = 'tabs',
     BTN_GROUPS = 'btn-groups',
-    RANGE = 'range'
+    RANGE = 'range',
+    MODALS = 'modals',
 }

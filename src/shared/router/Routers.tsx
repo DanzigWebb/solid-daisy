@@ -10,6 +10,7 @@ import {
     TabsPage
 } from '@views/pages';
 import { RoutersEnum } from '@shared/router/Routers.enum';
+import { ModalPage } from '@views/pages/actions';
 
 export const Routers: Component = () => {
 
@@ -21,6 +22,7 @@ export const Routers: Component = () => {
             <Route path={`/${RoutersEnum.TABS}`} element={<TabsPage/>}/>
             <Route path={`/${RoutersEnum.BTN_GROUPS}`} element={<BtnGroupPage/>}/>
             <Route path={`/${RoutersEnum.RANGE}`} element={<RangePage/>}/>
+            <Route path={`/${RoutersEnum.MODALS}`} element={<ModalPage/>}/>
 
             <Route path="/*all" element={<NotFound/>}/>
         </Routes>

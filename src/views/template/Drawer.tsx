@@ -21,6 +21,12 @@ export const Drawer: Component = (props) => {
 
                     <Menu>
                         <MenuDivider/>
+                        <MenuTitle>Actions</MenuTitle>
+                        <MenuLink href={`/${RoutersEnum.MODALS}`}>Modal</MenuLink>
+                        <MenuDivider/>
+                    </Menu>
+
+                    <Menu>
                         <MenuTitle>Form</MenuTitle>
                         <MenuLink href={`/${RoutersEnum.FORM_SELECT}`}>Select</MenuLink>
                         <MenuLink href={`/${RoutersEnum.FORM_INPUT}`}>Input</MenuLink>
