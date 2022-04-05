@@ -20,7 +20,6 @@ export const Drawer: Component = (props) => {
                     </div>
 
                     <Menu>
-                        <MenuDivider/>
                         <MenuTitle>Actions</MenuTitle>
                         <MenuLink href={`/${RoutersEnum.MODALS}`}>Modal</MenuLink>
                         <MenuDivider/>
@@ -46,7 +45,6 @@ export const Drawer: Component = (props) => {
                     <Menu>
                         <MenuTitle>Data view</MenuTitle>
                         <MenuLink href={`/${RoutersEnum.TOOLTIP}`}>Tooltip</MenuLink>
-                        <MenuDivider/>
                     </Menu>
                 </div>
             </div>
