@@ -1,4 +1,4 @@
-import { Component, JSXElement } from 'solid-js';
+import { Component, createEffect, JSXElement } from 'solid-js';
 import { useSteps } from '@components/steps/Steps';
 
 type Props = {
@@ -7,12 +7,24 @@ type Props = {
 }
 
 export const Step: Component<Props> = (props) => {
-
     const steps = useSteps();
 
     const isActive = () => {
-        return props.index <= steps?.step()
+        return props.index <= steps?.step();
     };
+
+    const isCurrent = () => {
+        console.log(steps?.step());
+        return props.index === steps?.step();
+    }
+
+    createEffect(() => {
+        console.log('effect');
+        console.log('isCurrent', isCurrent());
+        if (isCurrent()) {
+            steps.setStepContent(props.children);
+        }
+    });
 
     return (
         <li

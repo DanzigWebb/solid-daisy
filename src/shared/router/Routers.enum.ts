@@ -8,4 +8,5 @@ export enum RoutersEnum {
     RANGE = 'range',
     MODALS = 'modals',
     TOOLTIP = 'tooltip',
+    STEPS = 'steps',
 }
