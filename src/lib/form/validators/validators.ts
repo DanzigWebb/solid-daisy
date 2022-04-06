@@ -1,4 +1,4 @@
-import { FormValidator } from '@root/src/lib/form/form.type';
+import { FormValidator } from '../form.type';
 
 export class Validators {
     static required = (

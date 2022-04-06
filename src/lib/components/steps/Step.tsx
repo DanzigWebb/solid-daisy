@@ -1,5 +1,5 @@
 import { Component, createEffect, JSXElement } from 'solid-js';
-import { useSteps } from '@components/steps/Steps';
+import { useSteps } from './Steps';
 
 type Props = {
     label: JSXElement;

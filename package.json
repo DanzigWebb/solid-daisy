@@ -1,28 +1,42 @@
 {
-  "name": "vite-template-solid",
+  "name": "solidjs-daisy",
   "version": "0.0.0",
-  "description": "",
+  "description": "In developing...",
+  "files": [
+    "dist"
+  ],
+  "author": "alex <valverin95@gmail.com>",
+  "main": "./dist/my-lib.umd.js",
+  "module": "./dist/my-lib.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.es.js",
+      "require": "./dist/my-lib.umd.js"
+    }
+  },
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "types": "tsc src/lib/main.ts --emitDeclarationOnly --declaration --jsx preserve --outDir ./dist/types",
+    "release": "release-it"
   },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.23",
     "autoprefixer": "^10.4.4",
     "postcss": "^8.4.12",
+    "release-it": "^14.14.0",
     "tailwindcss": "^3.0.23",
     "typescript": "^4.6.3",
     "vite": "^2.8.6",
-    "vite-plugin-solid": "^2.2.6"
+    "vite-plugin-solid": "^2.2.6",
+    "solid-app-router": "^0.3.2"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
-    "@tailwindcss/forms": "^0.5.0",
     "daisyui": "^2.13.4",
-    "solid-app-router": "^0.3.2",
     "solid-js": "^1.3.13",
     "solid-transition-group": "^0.0.8"
   }

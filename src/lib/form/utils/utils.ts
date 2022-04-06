@@ -1,5 +1,5 @@
-import { FormControl, FormError, FormValidatorsOption } from '@root/src/lib/form/form.type';
 import { reconcile, SetStoreFunction } from 'solid-js/store';
+import { FormControl, FormErrorType, FormValidatorsOption } from '../form.type';
 
 /**
  * @internal
@@ -47,7 +47,7 @@ export const getControlValue = (input: FormControl): any => {
 export const validateForm = <Controls>(
     controls: Controls,
     validators: FormValidatorsOption<Controls | undefined>,
-    setError: SetStoreFunction<FormError<Controls>>
+    setError: SetStoreFunction<FormErrorType<Controls>>
 ) => {
     const validationErrors: any = {};
 
@@ -59,6 +59,7 @@ export const validateForm = <Controls>(
      * Validate all controls
      */
     Entries(controls).forEach(([name, value]) => {
+        // @ts-ignore
         const error = validateControl(name, value, validators);
         if (error) {
             validationErrors[name] = error;

@@ -1,5 +1,5 @@
 import { createSignal, createContext, useContext, Accessor, Component } from 'solid-js';
-import { SelectionModel } from '@components/btn-group/utils/selection.model';
+import { SelectionModel } from './utils/selection.model';
 
 type ContextType<T = any> = {
     activeBtn: Accessor<SelectionModel<T | undefined>>;

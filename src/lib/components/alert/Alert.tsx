@@ -1,6 +1,6 @@
 import { Component, createEffect, createSignal, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { SlideUpTransition } from '@components/utils/transitions';
+import { SlideUpTransition } from '../utils';
 
 export type AlertType = 'info' | 'success' | 'warning' | 'error';
 

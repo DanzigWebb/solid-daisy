@@ -1,25 +1,23 @@
 import { createStore, reconcile } from 'solid-js/store';
 import {
+    CUSTOM_EVENT_NAME,
+    Entries,
     FormControl,
-    FormError,
+    FormErrorType,
     FormOptions,
     FormValidatorsOption,
-    RegisterOptions
-} from '@root/src/lib/form/form.type';
-import {
-    Entries,
     getControlValue,
+    RegisterOptions,
     SetControlValue,
     validateControl,
-    validateForm
-} from '@root/src/lib/form/utils/utils';
-import { CUSTOM_EVENT_NAME } from '@root/src/lib/form/utils/constants';
+    validateForm,
+} from './';
 
 const customEvent = new CustomEvent(CUSTOM_EVENT_NAME);
 
 export function createForm<Controls extends {}>(options: FormOptions<Controls> = {}) {
     const refs: { [key in keyof Controls]?: FormControl } = {};
-    const [errors, setErrors] = createStore<FormError<Controls>>({});
+    const [errors, setErrors] = createStore<FormErrorType<Controls>>({});
 
     /**
      * Get all values of control
@@ -82,6 +80,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
         name: Name
     ) => {
         const errorMessage = validateControl(name, value, options.validators) as string;
+        // @ts-ignore
         const state = {...errors, [name]: errorMessage};
         setErrors(reconcile(state));
     };
@@ -93,6 +92,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
         control: Name,
         message: string,
     ) => {
+        // @ts-ignore
         setErrors({...errors, [control]: message});
     };
 

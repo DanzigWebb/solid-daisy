@@ -1,6 +1,6 @@
 import { onCleanup } from 'solid-js';
-import { FormControl } from '@root/src/lib/form/form.type';
-import { getControlValue } from '@root/src/lib/form/utils/utils';
+import { FormControl } from '../form.type';
+import { getControlValue } from './utils';
 
 /** @internal */
 export const watchValue = <Values, Key extends keyof Values, Value extends Values[Key]>(

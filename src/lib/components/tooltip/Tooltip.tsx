@@ -1,8 +1,8 @@
 import { Component, createEffect, createSignal, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import usePopper from '@root/src/lib/popper/usePopper';
 import { Placement } from '@popperjs/core';
-import { ScaleTransition } from '@components/utils/transitions/ScaleTransition';
+import usePopper from '../../popper/usePopper';
+import { ScaleTransition } from '../utils';
 
 type Props = {
     message: string;

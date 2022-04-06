@@ -1,5 +1,5 @@
 import { Component, JSXElement, onMount } from 'solid-js';
-import { useTabs } from '@components/tabs/Tabs';
+import { useTabs } from './Tabs';
 
 type Props = {
     label: JSXElement,

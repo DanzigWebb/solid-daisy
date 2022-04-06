@@ -1,5 +1,5 @@
 import { Accessor, Component, createContext, createMemo, createSignal, Show, useContext } from 'solid-js';
-import { SelectDropdown } from '@components/form/select/SelectDropdown';
+import { SelectDropdown } from './SelectDropdown';
 
 type ContextType = {
     value: Accessor<string>

@@ -1,5 +1,5 @@
 import { Component, createEffect, createSignal, Show } from 'solid-js';
-import { ScaleTransition } from '@components/utils/transitions/ScaleTransition';
+import { ScaleTransition } from '../../utils';
 
 type Props = {
     show: boolean;

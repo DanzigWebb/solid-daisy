@@ -5,8 +5,14 @@ import path from 'path';
 export default defineConfig({
     plugins: [solidPlugin()],
     build: {
-        target: 'esnext',
-        polyfillDynamicImport: false,
+        lib: {
+            entry: path.resolve(__dirname, 'src/lib/main.ts'),
+            formats: ["cjs", "es"],
+            fileName: (format) => `my-lib.${format}.js`,
+        },
+        rollupOptions: {
+            external: ['solid-js'],
+        },
     },
     resolve: {
         alias: {

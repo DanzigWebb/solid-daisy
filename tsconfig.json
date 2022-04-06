@@ -11,11 +11,5 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
-    "paths": {
-      "@root/*": ["./*"],
-      "@components/*": ["./src/lib/components/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@views/*": ["./src/views/*"],
-    }
   }
 }

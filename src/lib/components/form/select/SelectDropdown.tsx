@@ -1,8 +1,8 @@
 import { Accessor, Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js';
-import { SelectTypeEnum } from '@components/form/select/Select.type';
-import { ScaleTransition } from '@components/utils/transitions';
 import { Portal } from 'solid-js/web';
-import usePopper from '@root/src/lib/popper/usePopper';
+import usePopper from '../../../popper/usePopper';
+import { SelectTypeEnum } from './Select.type';
+import { ScaleTransition } from '../../utils';
 
 type Props = {
     isShow: boolean;

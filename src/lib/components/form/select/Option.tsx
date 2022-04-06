@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
-import { useSelect } from '@components/form/select/Select';
-import { SelectTypeEnum } from '@components/form/select/Select.type';
+import { useSelect } from './Select';
+import { SelectTypeEnum } from './Select.type';
 
 type Props = {
     value: string;
