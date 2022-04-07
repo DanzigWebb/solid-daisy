@@ -1,6 +1,6 @@
 {
   "name": "solidjs-daisy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "In developing...",
   "files": [
     "dist"
@@ -19,6 +19,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "tsc": "tsc",
     "types": "tsc src/lib/main.ts --emitDeclarationOnly --declaration --jsx preserve --outDir ./dist/types",
     "release": "release-it"
   },
@@ -28,11 +29,11 @@
     "autoprefixer": "^10.4.4",
     "postcss": "^8.4.12",
     "release-it": "^14.14.0",
+    "solid-app-router": "^0.3.2",
     "tailwindcss": "^3.0.23",
     "typescript": "^4.6.3",
     "vite": "^2.8.6",
-    "vite-plugin-solid": "^2.2.6",
-    "solid-app-router": "^0.3.2"
+    "vite-plugin-solid": "^2.2.6"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",

@@ -1,5 +1,5 @@
 import { Component } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
+import { Page } from '../base/Page';
 
 export const HomePage: Component = () => {
     return (

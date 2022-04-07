@@ -1,18 +1,11 @@
 import { Routes, Route } from 'solid-app-router';
 import { Component } from 'solid-js';
-import {
-    BtnGroupPage,
-    HomePage,
-    MenuPage,
-    NotFound,
-    RangePage,
-    SelectPage,
-    TabsPage
-} from '@views/pages';
-import { RoutersEnum } from '@shared/router/Routers.enum';
-import { ModalPage } from '@views/pages/actions';
-import { TooltipPage } from '@views/pages/data/tooltip/TooltipPage';
-import { StepsPage } from '@views/pages/navigation/steps/StepsPage';
+import { BtnGroupPage, HomePage, MenuPage, NotFound, RangePage, SelectPage, TabsPage } from '../../views/pages';
+import { RoutersEnum } from './Routers.enum';
+import { ModalPage } from '../../views/pages/actions';
+import { TooltipPage } from '../../views/pages/data/tooltip/TooltipPage';
+import { StepsPage } from '../../views/pages/navigation/steps/StepsPage';
+
 
 export const Routers: Component = () => {
 

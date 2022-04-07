@@ -1,7 +1,6 @@
 import { Component, createSignal } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Tooltip } from '@components/tooltip/Tooltip';
-import { ToggleButton, ToggleButtonsGroup } from '@components/btn-group';
+import { Page } from '../../base/Page';
+import { ToggleButton, ToggleButtonsGroup, Tooltip } from '../../../../lib/components';
 
 type Position = 'left' | 'top' | 'right' | 'bottom';
 

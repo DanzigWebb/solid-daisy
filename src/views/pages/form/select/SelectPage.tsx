@@ -1,7 +1,6 @@
 import { Component } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Select } from '@components/form/select/Select';
-import { Option } from '@components/form/select/Option';
+import { Page } from '../../base/Page';
+import { Select, Option } from '../../../../lib/components';
 
 export const SelectPage: Component = () => {
 

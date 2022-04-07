@@ -1,6 +1,6 @@
 import { Component, createSignal } from 'solid-js';
-import { ToggleButton, ToggleButtonsGroup } from '@components/btn-group';
-import { Page } from '@views/pages/base/Page';
+import { Page } from '../../base/Page';
+import { ToggleButton, ToggleButtonsGroup } from '../../../../lib/components';
 
 export const BtnGroupPage: Component = () => {
     const [btn, setBtn] = createSignal(3);

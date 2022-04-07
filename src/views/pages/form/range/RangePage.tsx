@@ -1,6 +1,7 @@
 import { Component, createSignal } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Range } from '@components/form/range/Range';
+import { Page } from '../../base/Page';
+import { Range } from '../../../../lib/components';
+
 
 export const RangePage: Component = () => {
     const [value, setValue] = createSignal(0);

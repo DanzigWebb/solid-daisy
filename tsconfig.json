@@ -9,7 +9,11 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "types": ["vite/client"],
-    "noEmit": true,
     "isolatedModules": true,
-  }
+    "outDir": "./dist/src",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "lib": ["ESNext", "DOM"],
+  },
+  "include": ["./src/lib/**/*"]
 }

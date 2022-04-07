@@ -1,6 +1,6 @@
 import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
-import { RoutersEnum } from '@shared/router/Routers.enum';
+import { RoutersEnum } from '../../shared/router/Routers.enum';
 
 export const Drawer: Component = (props) => {
     return (

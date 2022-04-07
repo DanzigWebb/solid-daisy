@@ -1,7 +1,7 @@
-import { RoutersEnum } from '@shared/router/Routers.enum';
 import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
+import { Page } from '../base/Page';
+import { RoutersEnum } from '../../../shared/router/Routers.enum';
 
 export const NotFound: Component = () => {
 

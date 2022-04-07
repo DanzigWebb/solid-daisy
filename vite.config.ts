@@ -8,7 +8,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/lib/main.ts'),
             formats: ["cjs", "es"],
-            fileName: (format) => `my-lib.${format}.js`,
+            fileName: (format) => `index.${format}.js`,
         },
         rollupOptions: {
             external: ['solid-js'],

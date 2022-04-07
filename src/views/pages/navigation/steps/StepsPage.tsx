@@ -1,6 +1,6 @@
 import { Component, createSignal } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Step, Steps } from '@components/steps';
+import { Page } from '../../base/Page';
+import { Step, Steps } from '../../../../lib/components';
 
 export const StepsPage: Component = () => {
     const [step, setStep] = createSignal(0);

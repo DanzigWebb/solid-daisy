@@ -1,6 +1,6 @@
 import { Component, createSignal } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Modal, ModalAction } from '@components/modal';
+import { Modal, ModalAction } from '../../../../../dist/src/components';
+import { Page } from '../../base/Page';
 
 export const ModalPage: Component = () => {
 

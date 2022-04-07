@@ -1,6 +1,6 @@
 import { Component } from 'solid-js';
-import { Page } from '@views/pages/base/Page';
-import { Tab, Tabs } from '@components/tabs';
+import { Page } from '../../base/Page';
+import { Tab, Tabs } from '../../../../lib/components';
 
 /**
  * Todo: 1) create value props
