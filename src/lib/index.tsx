@@ -1,4 +1,3 @@
-
 export * from './popper';
 
 export type {
@@ -12,8 +11,8 @@ export type {
 /**
  * Components
  */
+export { Tooltip } from './components/tooltip';
 export * from './components/utils';
-export * from './components/tooltip';
 export * from './components/tabs';
 export * from './components/steps';
 export * from './components/modal';

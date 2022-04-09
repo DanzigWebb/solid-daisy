@@ -6,5 +6,5 @@ export * from './modal';
 export * from './progress';
 export * from './steps';
 export * from './tabs';
-export * from './tooltip';
+export { Tooltip } from './tooltip';
 export * from './utils';
