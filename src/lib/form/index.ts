@@ -1,4 +1,9 @@
-export * from './createForm';
-export * from './form.type';
-export * from './utils';
-export * from './validators';
+export type {
+    FormControl,
+    FormErrorType,
+    FormOptions,
+    FormValidatorsOption,
+    RegisterOptions
+} from './form.type';
+
+export { createForm, } from './createForm';

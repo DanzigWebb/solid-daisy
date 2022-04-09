@@ -1,21 +1,16 @@
 import { createStore, reconcile } from 'solid-js/store';
 import {
-    CUSTOM_EVENT_NAME,
-    Entries,
     FormControl,
     FormErrorType,
     FormOptions,
     FormValidatorsOption,
-    getControlValue,
     RegisterOptions,
-    SetControlValue,
-    validateControl,
-    validateForm,
 } from './';
+import { CUSTOM_EVENT_NAME, Entries, getControlValue, setControlValue, validateControl, validateForm } from './utils';
 
 const customEvent = new CustomEvent(CUSTOM_EVENT_NAME);
 
-export function createForm<Controls extends {}>(options: FormOptions<Controls> = {}) {
+export function createForm<Controls extends {}, Name extends keyof Partial<Controls>, Value extends Controls[Name], >(options: FormOptions<Controls> = {}) {
     const refs: { [key in keyof Controls]?: FormControl } = {};
     const [errors, setErrors] = createStore<FormErrorType<Controls>>({});
 
@@ -35,7 +30,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
     /**
      * Registration control
      */
-    const register = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
+    const register = (
         name: Name,
         registerOptions: RegisterOptions<Controls> = {}
     ) => {
@@ -61,6 +56,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
                  */
                 const {defaultValues} = options;
                 if (defaultValues && defaultValues[name]) {
+                    // @ts-ignore
                     setValue(name, defaultValues[name]!);
                 }
 
@@ -75,7 +71,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
         };
     };
 
-    const onControlChange = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
+    const onControlChange = (
         value: Value,
         name: Name
     ) => {
@@ -88,7 +84,7 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
     /**
      * Set error to control
      */
-    const setError = <Name extends keyof Partial<Controls>>(
+    const setError = (
         control: Name,
         message: string,
     ) => {
@@ -99,17 +95,12 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
     /**
      * Set new value to registered control
      */
-    const setValue = <Name extends keyof Controls, Value extends Controls[Name]>(
-        name: Name,
-        value: Value,
-    ) => SetControlValue(refs[name]!, value, customEvent);
+    const setValue = (name: Name, value: Value,) => setControlValue(refs[name]!, value, customEvent);
 
     /**
      * Get value of registered control
      */
-    const getValue = <Name extends keyof Controls, Value extends Controls[Name]>(
-        name: Name
-    ) => getControlValue(refs[name]!);
+    const getValue = (name: Name) => getControlValue(refs[name]!);
 
     /**
      * @internal

@@ -13,7 +13,7 @@ export const Entries = <T extends {}>(obj: T): [keyof T, T[keyof T]][] => {
  * @internal
  * Set value to html control
  */
-export const SetControlValue = (control: FormControl, value: any, event: Event) => {
+export const setControlValue = (control: FormControl, value: any, event: Event) => {
     switch (control.type) {
         case 'checkbox':
             (control as HTMLInputElement).checked = Boolean(value);
