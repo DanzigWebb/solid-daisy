@@ -48,7 +48,7 @@ export const Tabs: Component<Props> = (props) => {
                 </For>
             </div>
 
-            <div className="p-4">
+            <div class="p-4">
                 {tabContent()}
             </div>
         </TabsContext.Provider>
