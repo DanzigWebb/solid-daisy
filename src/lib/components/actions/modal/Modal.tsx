@@ -1,6 +1,6 @@
 import { Component, createEffect, createSignal, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { ScaleTransition } from '../utils';
+import { ScaleTransition } from '../../utils';
 
 type Props = {
     isShow?: boolean;

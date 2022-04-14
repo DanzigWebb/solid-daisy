@@ -1,7 +1,7 @@
 import { Component, createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import usePopper from '../../popper/usePopper';
-import { Overlay, ScaleTransition } from '../utils';
+import usePopper from '../../../popper/usePopper';
+import { Overlay, ScaleTransition } from '../../utils';
 
 type Props = {
     isShow: boolean;
