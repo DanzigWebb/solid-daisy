@@ -1,6 +1,6 @@
 import { Component, createSignal } from 'solid-js';
 import { Page } from '../../base/Page';
-import { Range } from '../../../../../../src/lib';
+import { Range, Input } from '../../../../../../src/lib';
 
 
 
@@ -14,10 +14,10 @@ export const RangePage: Component = () => {
             <br/>
 
             <div class="w-96">
-                <input
+                <Input
                     type="text"
                     placeholder="Set value"
-                    class="input input-bordered w-full"
+                    bordered
                     value={value()}
                     onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
                 />
@@ -26,10 +26,10 @@ export const RangePage: Component = () => {
 
                 <br/>
 
-                <input
+                <Input
                     type="text"
                     placeholder="Set value"
-                    class="input input-bordered w-full"
+                    bordered
                     value={range()}
                     onInput={e => setRange(Number((e.target as HTMLInputElement).value))}
                 />
