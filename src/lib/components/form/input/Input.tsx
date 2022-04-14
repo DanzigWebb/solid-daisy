@@ -9,6 +9,8 @@ type InputColor = DaisyColor | 'ghost';
 type Props = {
     placeholder?: string;
     type?: string;
+    value?: string | number;
+
     color?: InputColor;
     size?: DaisySize;
     bordered?: boolean;
@@ -23,8 +25,10 @@ export const Input: Component<Props> = (props) => {
 
     return (
         <input
-            type="text"
+            type={props.type}
             placeholder={props.placeholder}
+            value={props.value}
+
             class="input"
             classList={{
                 'input-lg': props.size === 'lg',
