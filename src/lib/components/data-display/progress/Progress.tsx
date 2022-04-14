@@ -1,18 +1,10 @@
 import { Component } from 'solid-js';
-
-type ProgressColors =
-    'primary'
-    | 'secondary'
-    | 'accent'
-    | 'info'
-    | 'success'
-    | 'warning'
-    | 'error';
+import { DaisyColor } from '../../../types';
 
 type Props = {
     value: number;
     max?: number;
-    color?: ProgressColors;
+    color?: DaisyColor;
 }
 
 export const Progress: Component<Props> = (props) => {
