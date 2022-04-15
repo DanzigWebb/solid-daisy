@@ -6,13 +6,23 @@ import {
     FormValidatorsOption,
     RegisterOptions,
 } from './';
-import { CUSTOM_EVENT_NAME, Entries, getControlValue, setControlValue, validateControl, validateForm } from './utils';
+import {
+    CUSTOM_EVENT_NAME,
+    Entries,
+    getControlValue,
+    setControlValue,
+    validateControl,
+    validateForm
+} from './utils';
+import { distinctUntilChanged, map, Observable, Subject } from 'rxjs';
 
 const customEvent = new CustomEvent(CUSTOM_EVENT_NAME);
 
-export function createForm<Controls extends {}, Name extends keyof Partial<Controls>, Value extends Controls[Name], >(options: FormOptions<Controls> = {}) {
+export function createForm<Controls extends {}>(options: FormOptions<Controls> = {}) {
     const refs: { [key in keyof Controls]?: FormControl } = {};
     const [errors, setErrors] = createStore<FormErrorType<Controls>>({});
+
+    const valueState = new Subject<Controls>();
 
     /**
      * Get all values of control
@@ -30,7 +40,7 @@ export function createForm<Controls extends {}, Name extends keyof Partial<Contr
     /**
      * Registration control
      */
-    const register = (
+    const register = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
         name: Name,
         registerOptions: RegisterOptions<Controls> = {}
     ) => {
@@ -63,44 +73,54 @@ export function createForm<Controls extends {}, Name extends keyof Partial<Contr
                 return controlRef;
             },
             onInput: (e: Event) => {
-                const value = (e.target as FormControl).value;
-                // @ts-ignore
+                const value = (e.target as FormControl).value as unknown as Value;
                 onControlChange(value, name);
             },
             name
         };
     };
 
-    const onControlChange = (
+    const onControlChange = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
         value: Value,
         name: Name
     ) => {
         const errorMessage = validateControl(name, value, options.validators) as string;
-        // @ts-ignore
-        const state = {...errors, [name]: errorMessage};
-        setErrors(reconcile(state));
+        const clone = reconcile(errors);
+        const state = {...clone, [name]: errorMessage};
+        setErrors(state);
+
+        if (refs[name]?.type === 'abstractControl') {
+            setValue(name, value);
+        }
+        const values = getValues();
+        valueState.next(values);
     };
 
     /**
      * Set error to control
      */
-    const setError = (
+    const setError = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
         control: Name,
         message: string,
     ) => {
-        // @ts-ignore
-        setErrors({...errors, [control]: message});
+        const clone = reconcile(errors);
+        setErrors({...clone, [control]: message});
     };
 
     /**
      * Set new value to registered control
      */
-    const setValue = (name: Name, value: Value,) => setControlValue(refs[name]!, value, customEvent);
+    const setValue = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
+        name: Name,
+        value: Value
+    ) => setControlValue(refs[name]!, value, customEvent);
 
     /**
      * Get value of registered control
      */
-    const getValue = (name: Name) => getControlValue(refs[name]!);
+    const getValue = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
+        name: Name
+    ) => getControlValue(refs[name]!);
 
     /**
      * @internal
@@ -121,12 +141,23 @@ export function createForm<Controls extends {}, Name extends keyof Partial<Contr
         }
     };
 
+    const watch = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
+        name: Name
+    ): Observable<Value> => {
+        console.log(refs, name);
+        return valueState.asObservable().pipe(
+            map((controls) => controls[name] as Value),
+            distinctUntilChanged()
+        );
+    };
+
     return {
         register,
         setValue,
         getValue,
         setError,
         submit,
+        watch,
         errors,
     };
 }

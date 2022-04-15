@@ -42,5 +42,8 @@
     "@popperjs/core": "^2.11.2",
     "solid-js": "1",
     "solid-transition-group": "^0.0.8"
+  },
+  "dependencies": {
+    "rxjs": "^7.5.5"
   }
 }

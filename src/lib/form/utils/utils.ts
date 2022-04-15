@@ -1,5 +1,6 @@
 import { reconcile, SetStoreFunction } from 'solid-js/store';
-import { FormControl, FormErrorType, FormValidatorsOption } from '../form.type';
+import { FormControl, FormControlAbstract, FormErrorType, FormValidatorsOption } from '../form.type';
+import { Accessor } from 'solid-js';
 
 /**
  * @internal
@@ -18,10 +19,16 @@ export const setControlValue = (control: FormControl, value: any, event: Event) 
         case 'checkbox':
             (control as HTMLInputElement).checked = Boolean(value);
             break;
+        case 'abstractControl':
+            const abstractControl = control as FormControlAbstract;
+            abstractControl.setValue(value);
+            break;
         default:
             control.value = value;
     }
-    control.dispatchEvent(event);
+    if ('dispatchEvent' in control) {
+        control.dispatchEvent(event);
+    }
 };
 
 /**
@@ -34,6 +41,9 @@ export const getControlValue = (input: FormControl): any => {
             return Number(input.value);
         case 'checkbox':
             return Boolean(input.value);
+        case 'abstractControl':
+            const accessor = input.value as Accessor<any>;
+            return accessor();
         default:
             return input.value;
     }

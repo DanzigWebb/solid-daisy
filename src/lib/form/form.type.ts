@@ -1,4 +1,12 @@
-export type FormControl = HTMLInputElement | HTMLSelectElement;
+import { Accessor, Setter } from 'solid-js';
+
+export type FormControlAbstract = {
+    value: Accessor<any>;
+    setValue: Setter<any>;
+    type: string;
+}
+
+export type FormControl = HTMLInputElement | HTMLSelectElement | FormControlAbstract;
 
 export type FormErrorType<Controls> = { [Name in keyof Controls]?: string };
 
@@ -16,4 +24,10 @@ export interface FormOptions<Controls> {
 
 export type RegisterOptions<Controls> = {
     validators?: Array<FormValidator<Controls[keyof Partial<Controls>]>>;
+}
+
+export type FormRegisterProps = {
+    value?: Accessor<any>;
+    onInput: (v: any) => void;
+    ref: (c: FormControl) => FormControl;
 }
