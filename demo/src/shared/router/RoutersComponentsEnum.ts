@@ -7,6 +7,7 @@ export enum RoutersComponentsEnum {
     BTN_GROUPS = 'btn-groups',
     RANGE = 'range',
     MODALS = 'modals',
+    BUTTON = 'button',
     TOOLTIP = 'tooltip',
     STEPS = 'steps',
 }

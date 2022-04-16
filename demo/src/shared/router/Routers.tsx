@@ -2,7 +2,7 @@ import { Routes, Route } from 'solid-app-router';
 import { Component } from 'solid-js';
 import { BtnGroupPage, HomePage, MenuPage, NotFound, RangePage, SelectPage, TabsPage } from '../../views/pages';
 import { RoutersComponentsEnum, RouterSDKEnum } from './RoutersComponentsEnum';
-import { ModalPage } from '../../views/pages/actions';
+import { ButtonPage, ModalPage } from '../../views/pages/actions';
 import { TooltipPage } from '../../views/pages/data/tooltip/TooltipPage';
 import { StepsPage } from '../../views/pages/navigation/steps/StepsPage';
 import { InputPage } from '../../views/pages/form/input/InputPage';
@@ -21,6 +21,7 @@ export const Routers: Component = () => {
             <Route path={`/${RoutersComponentsEnum.BTN_GROUPS}`} element={<BtnGroupPage/>}/>
             <Route path={`/${RoutersComponentsEnum.RANGE}`} element={<RangePage/>}/>
             <Route path={`/${RoutersComponentsEnum.MODALS}`} element={<ModalPage/>}/>
+            <Route path={`/${RoutersComponentsEnum.BUTTON}`} element={<ButtonPage/>}/>
             <Route path={`/${RoutersComponentsEnum.TOOLTIP}`} element={<TooltipPage/>}/>
             <Route path={`/${RoutersComponentsEnum.STEPS}`} element={<StepsPage/>}/>
             <Route path={`/${RouterSDKEnum.FORM}`} element={<FormPage/>}/>
