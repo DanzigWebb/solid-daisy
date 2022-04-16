@@ -1,6 +1,6 @@
 import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
-import { RoutersEnum } from '../../shared/router/Routers.enum';
+import { RoutersComponentsEnum, RouterSDKEnum } from '../../shared/router/RoutersComponentsEnum';
 
 export const Drawer: Component = (props) => {
     return (
@@ -20,31 +20,37 @@ export const Drawer: Component = (props) => {
                     </div>
 
                     <Menu>
+                        <MenuTitle>SDK</MenuTitle>
+                        <MenuLink href={`/${RouterSDKEnum.FORM}`}>Form</MenuLink>
+                        <MenuDivider/>
+                    </Menu>
+
+                    <Menu>
                         <MenuTitle>Actions</MenuTitle>
-                        <MenuLink href={`/${RoutersEnum.MODALS}`}>Modal</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.MODALS}`}>Modal</MenuLink>
                         <MenuDivider/>
                     </Menu>
 
                     <Menu>
                         <MenuTitle>Form</MenuTitle>
-                        <MenuLink href={`/${RoutersEnum.FORM_SELECT}`}>Select</MenuLink>
-                        <MenuLink href={`/${RoutersEnum.FORM_INPUT}`}>Input</MenuLink>
-                        <MenuLink href={`/${RoutersEnum.RANGE}`}>Range</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.FORM_SELECT}`}>Select</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.FORM_INPUT}`}>Input</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.RANGE}`}>Range</MenuLink>
                         <MenuDivider/>
                     </Menu>
 
                     <Menu>
                         <MenuTitle>Navigation</MenuTitle>
-                        <MenuLink href={`/${RoutersEnum.MENU}`}>Menu</MenuLink>
-                        <MenuLink href={`/${RoutersEnum.TABS}`}>Tabs</MenuLink>
-                        <MenuLink href={`/${RoutersEnum.BTN_GROUPS}`}>Buttons group</MenuLink>
-                        <MenuLink href={`/${RoutersEnum.STEPS}`}>Steps</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.MENU}`}>Menu</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.TABS}`}>Tabs</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.BTN_GROUPS}`}>Buttons group</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.STEPS}`}>Steps</MenuLink>
                         <MenuDivider/>
                     </Menu>
 
                     <Menu>
                         <MenuTitle>Data view</MenuTitle>
-                        <MenuLink href={`/${RoutersEnum.TOOLTIP}`}>Tooltip</MenuLink>
+                        <MenuLink href={`/${RoutersComponentsEnum.TOOLTIP}`}>Tooltip</MenuLink>
                     </Menu>
                 </div>
             </div>

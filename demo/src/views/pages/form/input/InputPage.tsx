@@ -1,38 +1,13 @@
 import { Component } from 'solid-js';
 import { Page } from '../../base/Page';
-import { createForm, Input, AbstractControl } from '../../../../../../src/lib';
-
-type Controls = {
-    name: string;
-}
+import { Input } from '../../../../../../src/lib';
 
 export const InputPage: Component = () => {
-    const {register, watch} = createForm<Controls>({
-        defaultValues: {
-            name: '23'
-        }
-    });
-
-    watch('name').subscribe((data) => {
-        console.log(data);
-    })
-
     return (
         <Page full class="p-4">
             <h2 class="text-2xl">Input</h2>
             <br/>
 
-            <AbstractControl {...register('name')}>
-                {(state) => (
-                    <Input
-                        value={state.value()}
-                        onInput={state.onInput}
-                        bordered
-                    />
-                )}
-            </AbstractControl>
-
-            <br/><br/><br/><br/><br/>
             <div class="w-96 grid gap-2">
                 <Input
                     type="text"

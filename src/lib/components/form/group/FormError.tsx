@@ -18,7 +18,7 @@ export const FormError: Component<Props> = (props) => {
         <Show when={show()}>
             <ScaleTransition appear={true} onExit={() => setShow(false)}>
                 {props.show && (
-                    <i class="text-sm text-error absolute -bottom-5 left-0">
+                    <i class="text-xs text-error absolute -bottom-4 left-0">
                         {props.children}
                     </i>
                 )}

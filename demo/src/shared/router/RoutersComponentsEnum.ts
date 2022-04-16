@@ -1,4 +1,4 @@
-export enum RoutersEnum {
+export enum RoutersComponentsEnum {
     HOME = '',
     FORM_SELECT = 'select',
     FORM_INPUT = 'input',
@@ -9,4 +9,8 @@ export enum RoutersEnum {
     MODALS = 'modals',
     TOOLTIP = 'tooltip',
     STEPS = 'steps',
+}
+
+export enum RouterSDKEnum {
+    FORM = 'sdk/form'
 }

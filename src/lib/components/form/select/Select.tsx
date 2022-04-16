@@ -1,5 +1,6 @@
 import { Accessor, Component, createContext, createMemo, createSignal, Show, useContext } from 'solid-js';
 import { SelectDropdown } from './SelectDropdown';
+import { DaisyColor, DaisySize } from '../../../types';
 
 type ContextType = {
     value: Accessor<string>
@@ -10,6 +11,17 @@ const SelectContext = createContext<ContextType>();
 
 type Props = {
     placeholder?: string;
+    name?: string;
+    value?: string | number;
+
+    color?: DaisyColor;
+    size?: DaisySize;
+    bordered?: boolean;
+
+    onChange?: (e: InputEvent) => void;
+    onInput?: (e: string | number) => void;
+    onFocus?: (e: InputEvent) => void;
+    onBlur?: (e: InputEvent) => void;
 }
 
 export const Select: Component<Props> = (props) => {
@@ -25,6 +37,7 @@ export const Select: Component<Props> = (props) => {
 
     function setValue(value: string) {
         setState(state => ({...state, value}));
+        props.onInput?.(value);
     }
 
     function showDropdown() {
@@ -59,9 +72,13 @@ export const Select: Component<Props> = (props) => {
         <SelectContext.Provider value={store}>
             <input
                 ref={setReference}
-                class="select select-bordered"
+                class="select"
+                classList={{
+                    'select-bordered': props.bordered,
+                }}
                 value={value()}
                 placeholder={props.placeholder || ''}
+                name={props.name}
                 onClick={showDropdown}
                 onFocus={showDropdown}
             />

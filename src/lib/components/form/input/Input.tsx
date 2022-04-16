@@ -10,9 +10,12 @@ type Props = {
     placeholder?: string;
     type?: string;
     value?: string | number;
+    name?: string;
+    autocomplete?: string;
 
     color?: InputColor;
     size?: DaisySize;
+    error?: boolean;
     bordered?: boolean;
 
     onChange?: (e: InputEvent) => void;
@@ -28,6 +31,8 @@ export const Input: Component<Props> = (props) => {
             type={props.type}
             placeholder={props.placeholder}
             value={props.value}
+            name={props.name}
+            autocomplete={props.autocomplete}
 
             class="input"
             classList={{
@@ -42,7 +47,7 @@ export const Input: Component<Props> = (props) => {
                 'input-info':      props.color === 'info',
                 'input-success':   props.color === 'success',
                 'input-warning':   props.color === 'warning',
-                'input-error':     props.color === 'error',
+                'input-error':     props.color === 'error' || props.error,
                 'input-ghost':     props.color === 'ghost',
 
                 'input-bordered': props.bordered

@@ -73,7 +73,14 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
                 return controlRef;
             },
             onInput: (e: Event) => {
-                const value = (e.target as FormControl).value as unknown as Value;
+                const type = refs[name]?.type;
+                let value;
+                if (type === 'abstractControl') {
+                    value = e as unknown as Value;
+                } else {
+                    value = (e.target as FormControl).value as unknown as Value;
+                }
+
                 onControlChange(value, name);
             },
             name
@@ -151,13 +158,44 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
         );
     };
 
+    const valueChange = (): Observable<Controls> => {
+        return valueState.asObservable();
+    };
+
+    const reset = <Name extends keyof Partial<Controls>>() => {
+        Object.values(refs).forEach(control => {
+            setControlValue(control as FormControl, null, customEvent);
+        });
+
+        const values = getValues();
+        valueState.next(values);
+        _validate(values);
+    };
+
+    const resetControl = <Name extends keyof Partial<Controls>>(
+        name: Name
+    ) => {
+        const control = refs[name];
+        if (control) {
+            setControlValue(control as FormControl, null, customEvent);
+
+            const values = getValues();
+            valueState.next(values);
+            _validate(values);
+        }
+    };
+
     return {
         register,
         setValue,
         getValue,
+        getValues,
         setError,
+        reset,
+        resetControl,
         submit,
         watch,
+        valueChange,
         errors,
     };
 }

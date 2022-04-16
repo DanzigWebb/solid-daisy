@@ -98,6 +98,11 @@ export const validateControl = <Controls extends {}, Name extends keyof Partial<
     }
 
     const validators = validatorOptions[controlName];
+
+    if (!validators) {
+        return;
+    }
+
     if (Array.isArray(validators)) {
         for (let i = 0; i < validators.length; i++) {
             const validatorCallback = validators[i];

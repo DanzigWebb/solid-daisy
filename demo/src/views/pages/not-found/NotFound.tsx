@@ -1,7 +1,7 @@
 import { Link } from 'solid-app-router';
 import { Component } from 'solid-js';
 import { Page } from '../base/Page';
-import { RoutersEnum } from '../../../shared/router/Routers.enum';
+import { RoutersComponentsEnum } from '../../../shared/router/RoutersComponentsEnum';
 
 export const NotFound: Component = () => {
 
@@ -14,7 +14,7 @@ export const NotFound: Component = () => {
                         <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
                             exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
 
-                        <Link href={RoutersEnum.HOME}>
+                        <Link href={RoutersComponentsEnum.HOME}>
                             <button class="btn btn-primary">To main page</button>
                         </Link>
                     </div>
