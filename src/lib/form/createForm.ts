@@ -148,20 +148,28 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
         }
     };
 
+    /*
+    * Observable of controls changes
+    */
+    const valueChange = (): Observable<Controls> => {
+        return valueState.asObservable();
+    };
+
+    /*
+    * Observable of control
+    */
     const watch = <Name extends keyof Partial<Controls>, Value extends Controls[Name]>(
         name: Name
     ): Observable<Value> => {
-        console.log(refs, name);
-        return valueState.asObservable().pipe(
+        return valueChange().pipe(
             map((controls) => controls[name] as Value),
             distinctUntilChanged()
         );
     };
 
-    const valueChange = (): Observable<Controls> => {
-        return valueState.asObservable();
-    };
-
+    /*
+    * Reset all controls
+    */
     const reset = <Name extends keyof Partial<Controls>>() => {
         Object.values(refs).forEach(control => {
             setControlValue(control as FormControl, null, customEvent);
@@ -169,9 +177,12 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
 
         const values = getValues();
         valueState.next(values);
-        _validate(values);
+        clearErrors();
     };
 
+    /*
+    * Reset value of Control by name
+    */
     const resetControl = <Name extends keyof Partial<Controls>>(
         name: Name
     ) => {
@@ -181,21 +192,51 @@ export function createForm<Controls extends {}>(options: FormOptions<Controls> =
 
             const values = getValues();
             valueState.next(values);
-            _validate(values);
+            clearError(name);
         }
+    };
+
+    /*
+    * Clear error of Control
+    */
+    const clearError = <Name extends keyof Partial<Controls>>(
+        name: Name,
+    ) => {
+        const clone = reconcile(errors);
+        setErrors({...clone, [name]: null});
+    };
+
+    /*
+    * Clear all errors of controls
+    */
+    const clearErrors = <Name extends keyof Partial<Controls>>() => {
+        // @ts-ignore
+        const clone = {...errors} as FormErrorType<Controls>;
+        Object.keys(clone).forEach((key) => {
+            clone[key as Name] = null;
+        });
+        setErrors(clone);
     };
 
     return {
         register,
+
         setValue,
         getValue,
         getValues,
+
         setError,
+        clearError,
+        clearErrors,
+
         reset,
         resetControl,
+
         submit,
+
         watch,
         valueChange,
+
         errors,
     };
 }

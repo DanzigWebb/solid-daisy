@@ -102,22 +102,26 @@ export const FormPage: Component = () => {
                         </AbstractControl>
                     </FormField>
 
-                    <AbstractControl {...register('female')}>
-                        {(state) => (
-                            <Select
-                                onInput={state.onInput}
-                                value={state.value}
-                                name={state.name}
-                                placeholder="Female"
-                                bordered
-                            >
-                                <Option value="man">Man</Option>
-                                <Option value="woman">Woman</Option>
-                            </Select>
-                        )}
-                    </AbstractControl>
+                    <FormField>
+                        <AbstractControl {...register('female')}>
+                            {(state) => (
+                                <Select
+                                    onInput={state.onInput}
+                                    value={state.value}
+                                    name={state.name}
+                                    placeholder="Female"
+                                    bordered
+                                >
+                                    <Option value="man">Man</Option>
+                                    <Option value="woman">Woman</Option>
+                                </Select>
+                            )}
+                        </AbstractControl>
+                    </FormField>
 
-                    <button class="btn" onClick={reset}>Reset</button>
+                    <div>
+                        <button class="btn" onClick={reset}>Reset</button>
+                    </div>
                 </div>
                 <pre>
                     {Object.entries(controls()).map(([key, value]) => (

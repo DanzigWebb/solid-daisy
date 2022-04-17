@@ -8,7 +8,7 @@ export type FormControlAbstract = {
 
 export type FormControl = HTMLInputElement | HTMLSelectElement | FormControlAbstract;
 
-export type FormErrorType<Controls> = { [Name in keyof Controls]?: string };
+export type FormErrorType<Controls> = { [Name in keyof Controls]?: string | null };
 
 export type FormValidator<T> = (value: T | undefined | null) => string | void;
 
