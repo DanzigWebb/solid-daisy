@@ -1,9 +1,16 @@
-import { Accessor, Component, createContext, createMemo, createSignal, Show, useContext } from 'solid-js';
+import {
+    Component,
+    createContext,
+    createEffect,
+    createSignal,
+    Show,
+    useContext
+} from 'solid-js';
 import { SelectDropdown } from './SelectDropdown';
 import { DaisyColor, DaisySize } from '../../../types';
 
 type ContextType = {
-    value: Accessor<string>
+    value: any;
     setValue: (v: string) => void;
 }
 
@@ -27,16 +34,19 @@ type Props = {
 export const Select: Component<Props> = (props) => {
 
     const [reference, setReference] = createSignal<HTMLElement>();
+    const [value, setValue] = createSignal('');
     const [state, setState] = createSignal({
-        value: '',
         isHasDropdown: false,
         isShowDropdown: false,
     });
 
-    const value = createMemo(() => state().value);
+    createEffect(() => {
+        const value = (props.value || '') as string;
+        setValue(value);
+    });
 
-    function setValue(value: string) {
-        setState(state => ({...state, value}));
+    function setControlValue(value: string) {
+        setValue(value);
         props.onInput?.(value);
     }
 
@@ -58,15 +68,15 @@ export const Select: Component<Props> = (props) => {
         setState(state => ({...state, isShowDropdown}));
     }
 
+    function optionChecked(value: any) {
+        setControlValue(value);
+        hideDropdown();
+    }
+
     const store: ContextType = {
         value,
         setValue: optionChecked
     };
-
-    function optionChecked(value: any) {
-        setValue(value);
-        hideDropdown();
-    }
 
     return (
         <SelectContext.Provider value={store}>
