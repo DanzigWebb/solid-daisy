@@ -1,16 +1,7 @@
 import { Component, createSignal, onCleanup } from 'solid-js';
 import { Page } from '../../base/Page';
-import {
-    AbstractControl,
-    createForm,
-    FormError,
-    FormField,
-    Input,
-    Option,
-    Select,
-    Validators
-} from '../../../../../../src/lib';
-import { Subject, takeUntil } from 'rxjs';
+import { createForm, Validators } from '../../../../../../simple-forms/src/form';
+import { Input, Select, Option, FormField, FormError } from '../../../../../../src/lib';
 
 type Controls = {
     name: string,
@@ -27,102 +18,92 @@ const defaultValues: Controls = {
 };
 
 export const FormPage: Component = () => {
-    const [controls, setControls] = createSignal(defaultValues);
-    const {register, valueChange, errors, reset} = createForm<Controls>({
-        defaultValues
+
+    const {control, setValue, watch, errors, reset} = createForm<Controls>({
+        defaultValues,
+        validators: {
+            name: [Validators.required()]
+        }
     });
 
-    const destroy$ = new Subject();
+    const [controls, setControls] = createSignal<Partial<Controls>>(defaultValues);
 
-    valueChange()
-        .pipe(takeUntil(destroy$))
-        .subscribe((controls) => setControls(controls));
-
+    const form$ = watch().subscribe((data) => {
+        setControls(data);
+    });
 
     onCleanup(() => {
-        destroy$.next(null);
-        destroy$.complete();
+        form$.unsubscribe();
     });
+
+    function setFormValue() {
+        setValue({
+            name: 'Alexander',
+            phone: '+7 900 024 78 90',
+            email: 'em@mail.com',
+            female: 'man'
+        });
+    }
 
     return (
         <Page full class="p-4">
             <h2 class="text-2xl">Input</h2>
             <br/>
 
-            <div class="flex">
-                <div class="card gap-0 w-96 p-2">
+            <div className="flex gap-2">
+                <div class="flex p-2 flex-col gap-2 w-96">
                     <FormField>
-                        <AbstractControl {...register('name', {validators: [Validators.required()]})}>
-                            {(state) => (
-                                <Input
-                                    autocomplete="off"
-                                    value={state.value()}
-                                    onInput={e => state.onInput?.((e.target as HTMLInputElement).value)}
-                                    name={state.name}
-                                    error={!!errors.name}
-                                    placeholder="Name"
-                                    bordered
-                                />
-                            )}
-                        </AbstractControl>
+                        <Input
+                            autocomplete="off"
+                            placeholder="Name"
+                            bordered
+                            error={!!errors.name}
+                            {...control('name')}
+                        />
 
                         <FormError show={!!errors.name}>Required field</FormError>
                     </FormField>
 
                     <FormField>
-                        <AbstractControl {...register('email', {validators: [Validators.required(), Validators.emailValidator()]})}>
-                            {(state) => (
-                                <Input
-                                    autocomplete="off"
-                                    value={state.value()}
-                                    onInput={e => state.onInput?.((e.target as HTMLInputElement).value)}
-                                    name={state.name}
-                                    error={!!errors.email}
-                                    placeholder="Email"
-                                    bordered
-                                />
-                            )}
-                        </AbstractControl>
+                        <Input
+                            autocomplete="off"
+                            placeholder="Email"
+                            bordered
+                            {...control('email')}
+                        />
 
-                        <FormError show={!!errors.email}>{errors.email}</FormError>
+                        <FormError show={!!errors.email}>Required field</FormError>
+                    </FormField>
+
+
+                    <FormField>
+                        <Input
+                            autocomplete="off"
+                            placeholder="Phone"
+                            bordered
+                            {...control('phone')}
+                        />
+
+                        <FormError show={!!errors.phone}>Required field</FormError>
                     </FormField>
 
                     <FormField>
-                        <AbstractControl {...register('phone')}>
-                            {(state) => (
-                                <Input
-                                    autocomplete="off"
-                                    value={state.value()}
-                                    onInput={e => state.onInput?.((e.target as HTMLInputElement).value)}
-                                    name={state.name}
-                                    placeholder="Phone"
-                                    bordered
-                                />
-                            )}
-                        </AbstractControl>
+                        <Select
+                            placeholder="Female"
+                            bordered
+                            {...control('female')}
+                        >
+                            <Option value="man">Man</Option>
+                            <Option value="woman">Woman</Option>
+                        </Select>
                     </FormField>
 
-                    <FormField>
-                        <AbstractControl {...register('female')}>
-                            {(state) => (
-                                <Select
-                                    onInput={state.onInput}
-                                    value={state.value}
-                                    name={state.name}
-                                    placeholder="Female"
-                                    bordered
-                                >
-                                    <Option value="man">Man</Option>
-                                    <Option value="woman">Woman</Option>
-                                </Select>
-                            )}
-                        </AbstractControl>
-                    </FormField>
-
-                    <div>
-                        <button class="btn" onClick={reset}>Reset</button>
+                    <div class="flex gap-1">
+                        <button class="btn" onClick={setFormValue}>Autocomplete</button>
+                        <button class="btn" onClick={() => reset()}>Reset</button>
                     </div>
                 </div>
+
                 <pre>
                     {Object.entries(controls()).map(([key, value]) => (
                         <div class="grid grid-cols-2 gap-2">
@@ -132,6 +113,8 @@ export const FormPage: Component = () => {
                     ))}
                 </pre>
             </div>
+
+
         </Page>
     );
 };
